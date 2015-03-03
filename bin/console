@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
-require 'pdf_receipt'
+require 'receipt'
 
 require 'pry'
 Pry.start

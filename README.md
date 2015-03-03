@@ -1,4 +1,4 @@
-# PdfReceipt
+# Receipt
 
 PDF Receipts generator for any ruby application.
 
@@ -7,7 +7,7 @@ PDF Receipts generator for any ruby application.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'pdf_receipt'
+gem 'receipt'
 ```
 
 And then execute:
@@ -16,12 +16,12 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install pdf_receipt
+    $ gem install receipt
 
 ## Usage
 
 ```ruby
-receipt = PdfReceipt.new(
+receipt = Receipt::Pdf.new(
   id: 1,
   date: Time.now.strftime('%d/%m/%Y'),
   amount: 100.0,
@@ -57,7 +57,7 @@ push git commits and tags, and push the `.gem` file to
 
 ## Contributing
 
-1. Fork it ( https://github.com/fernandoalmeida/pdf_receipt/fork )
+1. Fork it ( https://github.com/fernandoalmeida/receipt/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
