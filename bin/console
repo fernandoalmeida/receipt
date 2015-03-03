@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'pdf_receipt'
+
+require 'pry'
+Pry.start
+
+require 'irb'
+IRB.start
