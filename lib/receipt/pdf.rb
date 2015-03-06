@@ -2,6 +2,8 @@ module Receipt
   class MissingRequiredParamError < StandardError; end
 
   class Pdf
+    include Prawn::View
+
     attr_reader :id,
                 :payer,
                 :receiver,
