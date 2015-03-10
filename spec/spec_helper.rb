@@ -2,6 +2,7 @@ $: << File.join(File.dirname(__FILE__), '/../lib')
 
 require 'pry'
 require 'rspec'
+require 'pdf/inspector'
 require 'receipt'
 
 RSpec.configure do |config|
