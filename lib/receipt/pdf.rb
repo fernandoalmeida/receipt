@@ -55,6 +55,10 @@ module Receipt
       @before ||= block
     end
 
+    def after_receipt_box(&block)
+      @after ||= block
+    end
+
     def valid?
       [
         :id,
@@ -78,6 +82,9 @@ module Receipt
 
       move_down 20
       receipt_box
+
+      move_down 20
+      after_receipt_box.call if after_receipt_box
     end
 
     def header

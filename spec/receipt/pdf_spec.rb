@@ -74,13 +74,25 @@ describe Receipt::Pdf do
   end
 
   describe '#before_receipt_box' do
-    subject(:receipt_with_content_before_receipt) do
+    subject(:receipt_with_content_before_receipt_box) do
       receipt.tap do |r|
         r.before_receipt_box { r.text(text) }
       end
     end
 
     let(:text) { 'content before receipt box' }
+
+    it { expect(strings).to include(text) }
+  end
+
+  describe '#after_receipt_box' do
+    subject(:receipt_with_content_after_receipt_box) do
+      receipt.tap do |r|
+        r.after_receipt_box { r.text(text) }
+      end
+    end
+
+    let(:text) { 'content after receipt box' }
 
     it { expect(strings).to include(text) }
   end
