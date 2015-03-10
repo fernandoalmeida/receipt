@@ -9,7 +9,7 @@ module Receipt
 
     include Prawn::View
 
-    attr_reader :params, :filepath
+    attr_reader :params, :filepath, :errors
 
     def_delegators :I18n, :t, :l
 
@@ -31,9 +31,24 @@ module Receipt
       @params = OpenStruct.new(params)
       setup_i18n
 
+      @errors = {}
       @filepath = @params.filepath || tempfilepath
     end
 
+
+    def valid?
+      [
+        :id,
+        :amount,
+        :payer,
+        :receiver,
+        :description
+      ].each do |p|
+        @errors[p] = 'required param not found' if params.send(p).to_s.empty?
+      end
+
+      @errors.size == 0
+    end
     def setup_i18n
       load_translations
       set_locale

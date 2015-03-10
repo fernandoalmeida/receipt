@@ -29,8 +29,25 @@ describe Receipt::Pdf do
     it { expect(receipt.logo).to eq('logo.png') }
     it { expect(receipt.location).to eq('Sao Paulo') }
   end
+
+  describe '#valid?' do
+    it { expect(receipt.valid?).to be_truthy }
+
+    context 'when is not valid' do
+      before { params.delete(:id) }
+
+      it { expect(receipt.valid?).to be_falsy }
+
+      [:id, :amount, :payer, :receiver, :description].each do |p|
+        it "validates the presence of #{p}" do
+          params.delete(p)
+          receipt.valid?
+
+          expect(receipt.errors).to include(p)
+        end
       end
     end
+  end
 
     context 'when an optional param is not passed' do
       [:date, :currency, :logo].each do |p|
