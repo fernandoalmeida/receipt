@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Receipt::VERSION
   spec.authors       = ['Fernando Almeida']
   spec.email         = ['fernando@fernandoalmeida.net']
-  spec.summary       = 'Receipts generator for any ruby application.'
-  spec.description   = 'Receipts generator for any ruby application.'
+  spec.summary       = 'Receipt generator for ruby application.'
+  spec.description   = 'Generates receipts on PDF format.'
   spec.homepage      = 'http://github.com/fernandoalmeida/receipt'
   spec.license       = 'MIT'
 
@@ -20,11 +20,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'prawn', '~> 2.0'
-  spec.add_dependency 'i18n'
+  spec.add_dependency 'i18n', '~> 0.7'
 
-  spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'bundler', '~> 1.8'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'pry', '~> 0.10'
   spec.add_development_dependency 'rspec', '~> 3.2'
-  spec.add_development_dependency 'pdf-inspector'
+  spec.add_development_dependency 'pdf-inspector', '~> 1.2'
 end
