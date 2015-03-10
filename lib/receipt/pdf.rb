@@ -1,29 +1,38 @@
+require 'ostruct'
 module Receipt
   class MissingRequiredParamError < StandardError; end
 
   class Pdf
+    extend Forwardable
+
     include Prawn::View
 
-    attr_reader :id,
-                :payer,
-                :receiver,
-                :amount,
-                :date,
-                :currency,
-                :description,
-                :logo
+    attr_reader :params, :filepath
+
+    def_delegators :params, *[
+      :id,
+      :payer,
+      :receiver,
+      :amount,
+      :date,
+      :currency,
+      :description,
+      :logo,
+      :location,
+      :locale,
+      :filepath
+    ]
 
     def initialize(params)
-      @id = params.fetch(:id)
-      @description = params.fetch(:description)
-      @payer = params.fetch(:payer)
-      @receiver = params.fetch(:receiver)
-      @amount = params.fetch(:amount)
-      @date = params.fetch(:date, Time.now.strftime('%d/%m/%Y'))
-      @currency = params.fetch(:currency, '$')
-      @logo = params.fetch(:logo, nil)
-    rescue KeyError => ex
-      raise MissingRequiredParamError, ex.message
+      @params = OpenStruct.new(params)
+      @filepath = @params.filepath || tempfilepath
+    end
+
+    def tempfilepath
+      @tempfilepath ||= File.join(
+        Dir.tmpdir,
+        Dir::Tmpname.make_tmpname("#{t(:receipt)}", "#{id}.pdf")
+      )
     end
   end
 end

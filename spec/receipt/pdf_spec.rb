@@ -1,42 +1,34 @@
 describe Receipt::Pdf do
   subject(:receipt) { described_class.new(params) }
 
-  describe '#initialize' do
-    let(:params) do
-      {
-        id: 1,
-        date: date,
-        amount: 100.0,
-        currency: '$',
-        payer: 'Chucky Norris',
-        receiver: 'Fernando Almeida',
-        description: 'Transaction #123',
-        logo: 'logo.png'
-      }
-    end
-
     let(:date) { Time.now.strftime('%d/%m/%Y') }
+  let(:params) do
+    {
+      id: 1,
+      date: date,
+      amount: 100.0,
+      currency: '$',
+      payer: 'Chucky Norris',
+      receiver: 'Fernando Almeida',
+      description: 'Transaction #123',
+      logo: 'logo.png',
+      location: 'Sao Paulo',
+      locale: :pt
+    }
+  end
 
-    let(:missing_required_param_error) { Receipt::MissingRequiredParamError }
 
-    it { expect(subject.id).to eq(1) }
-    it { expect(subject.date).to eq(date) }
-    it { expect(subject.amount).to eq(100.0) }
-    it { expect(subject.currency).to eq('$') }
-    it { expect(subject.payer).to eq('Chucky Norris') }
-    it { expect(subject.receiver).to eq('Fernando Almeida') }
-    it { expect(subject.description).to eq('Transaction #123') }
-    it { expect(subject.logo).to eq('logo.png') }
-
-    context 'when a required param is not passed' do
-      [:id, :amount, :payer, :receiver, :description].each do |p|
-        it "validates the presence of #{p}" do
-          params.delete(p)
-
-          expect { subject }
-            .to raise_error(missing_required_param_error)
-            .with_message("key not found: :#{p}")
-        end
+  describe '#initialize' do
+    it { expect(receipt.id).to eq(1) }
+    it { expect(receipt.date).to eq(date) }
+    it { expect(receipt.amount).to eq(100.0) }
+    it { expect(receipt.currency).to eq('$') }
+    it { expect(receipt.payer).to eq('Chucky Norris') }
+    it { expect(receipt.receiver).to eq('Fernando Almeida') }
+    it { expect(receipt.description).to eq('Transaction #123') }
+    it { expect(receipt.logo).to eq('logo.png') }
+    it { expect(receipt.location).to eq('Sao Paulo') }
+  end
       end
     end
 
