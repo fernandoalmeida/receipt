@@ -35,6 +35,12 @@ module Receipt
       @filepath = @params.filepath || tempfilepath
     end
 
+    def data
+      return unless valid?
+
+      generate
+      render
+    end
 
     def valid?
       [
@@ -49,6 +55,105 @@ module Receipt
 
       @errors.size == 0
     end
+
+    private
+
+    def generate
+      valid?
+
+      receipt_box
+    end
+
+    def header
+      pad(10) do
+        text(t(:receipt).upcase, align: :center, style: :bold, size: 20)
+
+        move_up 20
+        text("#{t(:number)}: <b>#{id}</b>", inline_format: true)
+
+        move_up 15
+        text("#{t(:amount)}: <b>#{formated_amount}</b>",
+             inline_format: true, align: :right)
+        pad(10) { stroke_horizontal_rule }
+      end
+    end
+
+    def body
+      text(
+        [
+          "#{t(:received_from)} <b>#{payer}</b>",
+          "#{t(:the_amount_of)} <b>#{formated_amount}</b>",
+          "#{t(:relating_to)} <b>#{description}</b>."
+        ].join(' '),
+        inline_format: true
+      )
+    end
+
+    def footer
+      move_cursor_to 70
+      stroke_horizontal_rule
+
+      pad(35) do
+        position = cursor
+        width = bounds.width / 2
+
+        date_box(0, position, width)
+        signature_box(width, position, width)
+      end
+    end
+
+    def formated_amount
+      [
+        currency,
+        amount
+      ].join(' ')
+    end
+
+    def date_box(x, y, width)
+      bounding_box [x, y], width: width do
+        text(
+          [
+            location,
+            l(date, format: :long)
+          ].join(', ')
+        )
+      end
+    end
+
+    def receipt_box
+      padded_bounding_box(10, [30, cursor], width: 500, height: 250) do
+        header
+        body
+        footer
+      end
+    end
+
+    def signature_box(x, y, width)
+      bounding_box [x, y], width: width do
+        stroke_horizontal_rule
+        move_down 10
+        centered_text(receiver)
+      end
+    end
+
+    def centered_text(s)
+      text(s, align: :center)
+    end
+
+    def padded_bounding_box(padding, *args)
+      bounding_box(*args) do
+        stroke_bounds
+
+        bounding_box(
+          [padding, bounds.height - padding],
+          width: bounds.width - (2 * padding),
+          height: bounds.height - (2 * padding)
+        ) do
+          yield
+        end
+      end
+    end
+
     def setup_i18n
       load_translations
       set_locale

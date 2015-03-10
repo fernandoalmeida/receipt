@@ -9,14 +9,14 @@ describe Receipt::Pdf do
       currency: '$',
       payer: 'Chucky Norris',
       receiver: 'Fernando Almeida',
-      description: 'Transaction #123',
+      description: 'transaction #123',
       logo: 'logo.png',
       location: 'Sao Paulo',
-      locale: :pt
+      locale: :en
     }
   end
 
-  let(:date) { Time.now.to_date }
+  let(:date) { Date.new(2015, 03, 10) }
 
   describe '#initialize' do
     it { expect(receipt.id).to eq(1) }
@@ -25,7 +25,7 @@ describe Receipt::Pdf do
     it { expect(receipt.currency).to eq('$') }
     it { expect(receipt.payer).to eq('Chucky Norris') }
     it { expect(receipt.receiver).to eq('Fernando Almeida') }
-    it { expect(receipt.description).to eq('Transaction #123') }
+    it { expect(receipt.description).to eq('transaction #123') }
     it { expect(receipt.logo).to eq('logo.png') }
     it { expect(receipt.location).to eq('Sao Paulo') }
   end
@@ -49,13 +49,23 @@ describe Receipt::Pdf do
     end
   end
 
-    context 'when an optional param is not passed' do
-      [:date, :currency, :logo].each do |p|
-        it "does not validate the presence of #{p}" do
-          params.delete(p)
+  describe '#data' do
+    subject(:data) { receipt.data }
 
-          expect { subject }.not_to raise_error
-        end
+    let(:strings) { PDF::Inspector::Text.analyze(subject).strings.join }
+    let(:pages) { PDF::Inspector::Page.analyze(subject).pages }
+
+    it { expect(data).to be_truthy }
+    it { expect(pages.size).to eq(1) }
+    it { expect(strings).to include('RECEIPT') }
+    it { expect(strings).to include('Number: 1') }
+    it { expect(strings).to include('Amount: $ 100.0') }
+    it { expect(strings).to include('Received from Chucky Norris') }
+    it { expect(strings).to include('the amount of $ 100.0') }
+    it { expect(strings).to include('relating to transaction #123') }
+    it { expect(strings).to include('Sao Paulo, March 10, 2015') }
+    it { expect(strings).to include('Fernando Almeida') }
+  end
       end
     end
   end
