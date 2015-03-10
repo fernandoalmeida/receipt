@@ -23,17 +23,19 @@ Or install it yourself as:
 ```ruby
 receipt = Receipt::Pdf.new(
   id: 1,
-  date: Time.now.strftime('%d/%m/%Y'),
+  date: Time.now.to_date,
   amount: 100.0,
   currency: '$',
   payer: 'Chucky Norris',
   receiver: 'Fernando Almeida',
-  description: 'Transaction #123',
-  logo: 'logo.png'
-).generate
+  description: 'transaction #123',
+  logo: 'logo.png',
+  filepath: '/my/receipts/path/file1234.pdf',
+  locale: :en # or :pt
+)
 
-# send to email
-receipt.send_to('payer@email.com')
+# generates file
+File.open(receipt.file)
 
 # send to download
 send_data(receipt.data, filename: receipt.filename, type: receipt.type)
