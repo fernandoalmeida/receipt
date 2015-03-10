@@ -18,6 +18,9 @@ describe Receipt::Pdf do
 
   let(:date) { Date.new(2015, 03, 10) }
 
+  let(:strings) { PDF::Inspector::Text.analyze(subject.data).strings.join }
+  let(:pages) { PDF::Inspector::Page.analyze(subject.data).pages }
+
   describe '#initialize' do
     it { expect(receipt.id).to eq(1) }
     it { expect(receipt.date).to eq(date) }
@@ -50,12 +53,7 @@ describe Receipt::Pdf do
   end
 
   describe '#data' do
-    subject(:data) { receipt.data }
-
-    let(:strings) { PDF::Inspector::Text.analyze(subject).strings.join }
-    let(:pages) { PDF::Inspector::Page.analyze(subject).pages }
-
-    it { expect(data).to be_truthy }
+    it { expect(receipt.data).to be_truthy }
     it { expect(pages.size).to eq(1) }
     it { expect(strings).to include('RECEIPT') }
     it { expect(strings).to include('Number: 1') }
@@ -74,7 +72,16 @@ describe Receipt::Pdf do
     it { expect(file).to match(/(pdf)$/) }
     it { expect(File.exist?(file)).to be_truthy }
   end
+
+  describe '#before_receipt_box' do
+    subject(:receipt_with_content_before_receipt) do
+      receipt.tap do |r|
+        r.before_receipt_box { r.text(text) }
       end
     end
+
+    let(:text) { 'content before receipt box' }
+
+    it { expect(strings).to include(text) }
   end
 end

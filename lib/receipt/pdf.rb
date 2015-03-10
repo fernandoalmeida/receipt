@@ -51,6 +51,10 @@ module Receipt
       end.call
     end
 
+    def before_receipt_box(&block)
+      @before ||= block
+    end
+
     def valid?
       [
         :id,
@@ -70,6 +74,9 @@ module Receipt
     def generate
       valid?
 
+      before_receipt_box.call if before_receipt_box
+
+      move_down 20
       receipt_box
     end
 
