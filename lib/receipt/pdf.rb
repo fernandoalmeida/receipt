@@ -9,7 +9,7 @@ module Receipt
 
     include Prawn::View
 
-    attr_reader :params, :filepath, :errors
+    attr_reader :params, :errors
 
     def_delegators :I18n, :t, :l
 
@@ -32,7 +32,6 @@ module Receipt
       setup_i18n
 
       @errors = {}
-      @filepath = @params.filepath || tempfilepath
     end
 
     def data
@@ -40,6 +39,16 @@ module Receipt
 
       generate
       render
+    end
+
+    def file
+      return unless valid?
+
+      @file ||= lambda do
+        generate
+        save_as(path)
+        path
+      end.call
     end
 
     def valid?
@@ -166,6 +175,10 @@ module Receipt
 
     def set_locale
       I18n.locale = (locale || I18n.default_locale)
+    end
+
+    def path
+      @path ||= (params.filepath || tempfilepath)
     end
 
     def tempfilepath

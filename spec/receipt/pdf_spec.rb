@@ -66,6 +66,14 @@ describe Receipt::Pdf do
     it { expect(strings).to include('Sao Paulo, March 10, 2015') }
     it { expect(strings).to include('Fernando Almeida') }
   end
+
+  describe '#file' do
+    subject(:file) { receipt.file }
+
+    it { expect(file).to be_truthy }
+    it { expect(file).to match(/(pdf)$/) }
+    it { expect(File.exist?(file)).to be_truthy }
+  end
       end
     end
   end
