@@ -1,7 +1,6 @@
 describe Receipt::Pdf do
   subject(:receipt) { described_class.new(params) }
 
-    let(:date) { Time.now.strftime('%d/%m/%Y') }
   let(:params) do
     {
       id: 1,
@@ -17,6 +16,7 @@ describe Receipt::Pdf do
     }
   end
 
+  let(:date) { Time.now.to_date }
 
   describe '#initialize' do
     it { expect(receipt.id).to eq(1) }
