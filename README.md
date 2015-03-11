@@ -36,7 +36,7 @@ receipt = Receipt::Pdf.new(
   description: 'transaction #123',
   logo: 'logo.png',
   filepath: '/my/receipts/path/file1234.pdf',
-  locale: :en # or :pt
+  locale: :en # or 'pt-BR'
 )
 
 # generates file
