@@ -5,6 +5,7 @@ PDF Receipts generator for any ruby application.
 ## Code Status
 
 [![Build Status](https://travis-ci.org/fernandoalmeida/receipt.svg)](https://travis-ci.org/fernandoalmeida/receipt)
+[![Code Climate](https://codeclimate.com/github/fernandoalmeida/receipt/badges/gpa.svg)](https://codeclimate.com/github/fernandoalmeida/receipt)
 
 ## Installation
 
