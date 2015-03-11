@@ -2,6 +2,10 @@
 
 PDF Receipts generator for any ruby application.
 
+## Code Status
+
+[![Build Status](https://travis-ci.org/fernandoalmeida/receipt.svg)](https://travis-ci.org/fernandoalmeida/receipt)
+
 ## Installation
 
 Add this line to your application's Gemfile:
