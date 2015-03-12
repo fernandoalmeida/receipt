@@ -102,4 +102,17 @@ describe Receipt::Pdf do
 
     it { is_expected.to eq 'application/pdf' }
   end
+
+  describe '#filename' do
+    subject(:filename) { receipt.filename }
+
+    it { is_expected.to match(/^Receipt.*1.pdf$/) }
+
+    context 'when a filepath is passed' do
+      let(:receipt) { described_class.new(params.merge(filepath)) }
+      let(:filepath) { { filepath: '/tmp/custom.pdf' } }
+
+      it { is_expected.to eq('custom.pdf') }
+    end
+  end
 end
