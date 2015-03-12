@@ -3,7 +3,6 @@ require 'ostruct'
 require 'i18n'
 
 module Receipt
-  class MissingRequiredParamError < StandardError; end
   class Pdf
     extend Forwardable
 

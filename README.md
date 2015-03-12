@@ -34,7 +34,6 @@ receipt = Receipt::Pdf.new(
   payer: 'Chucky Norris',
   receiver: 'Fernando Almeida',
   description: 'transaction #123',
-  logo: 'logo.png',
   filepath: '/my/receipts/path/file1234.pdf',
   locale: :en # or 'pt-BR'
 )
@@ -43,7 +42,7 @@ receipt = Receipt::Pdf.new(
 File.open(receipt.file)
 
 # send to download
-send_data(receipt.data, filename: receipt.filename, type: receipt.type)
+send_data(receipt.data, filename: receipt.filename, type: receipt.mimetype)
 ```
 
 ## Development
