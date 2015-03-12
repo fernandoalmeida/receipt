@@ -1,7 +1,7 @@
 ---
 en:
   receipt: Receipt
-  number: Number
+  receipt_number: Number
   amount: Amount
   received_from: Received from
   the_amount_of: the amount of

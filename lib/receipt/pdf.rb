@@ -99,7 +99,7 @@ module Receipt
         text(t(:receipt).upcase, align: :center, style: :bold, size: 20)
 
         move_up 20
-        text("#{t(:number)}: <b>#{id}</b>", inline_format: true)
+        text("#{t(:receipt_number)}: <b>#{id}</b>", inline_format: true)
 
         move_up 15
         text("#{t(:amount)}: <b>#{formated_amount}</b>",

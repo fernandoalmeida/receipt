@@ -1,7 +1,7 @@
 ---
 pt-BR:
   receipt: Recibo
-  number: Numero
+  receipt_number: Numero
   amount: Valor
   received_from: Recebi de
   the_amount_of: a quantia de
