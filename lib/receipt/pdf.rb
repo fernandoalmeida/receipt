@@ -128,7 +128,7 @@ module Receipt
       [
         currency,
         amount
-      ].join(' ')
+      ].compact.join(' ')
     end
 
     def date_box(x, y, width)
@@ -137,7 +137,7 @@ module Receipt
           [
             location,
             l(date, format: :long)
-          ].join(', ')
+          ].compact.join(', ')
         )
       end
     end
