@@ -96,4 +96,10 @@ describe Receipt::Pdf do
 
     it { expect(strings).to include(text) }
   end
+
+  describe '#mimetype' do
+    subject(:mimetype) { receipt.mimetype }
+
+    it { is_expected.to eq 'application/pdf' }
+  end
 end

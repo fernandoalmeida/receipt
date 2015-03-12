@@ -72,6 +72,10 @@ module Receipt
       @errors.size == 0
     end
 
+    def mimetype
+      'application/pdf'
+    end
+
     private
 
     def generate
