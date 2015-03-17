@@ -67,7 +67,7 @@ module Receipt
         :description
       ].each do |p|
         if params.send(p).to_s.empty?
-          @errors[p] = t('required_param_not_found')
+          @errors[p] = t('receipt.errors.required_param_not_found')
         end
       end
 
@@ -98,13 +98,13 @@ module Receipt
 
     def header
       pad(10) do
-        text(t(:receipt).upcase, align: :center, style: :bold, size: 20)
+        text(t('receipt.title').upcase, align: :center, style: :bold, size: 20)
 
         move_up 20
-        text("#{t(:receipt_number)}: <b>#{id}</b>", inline_format: true)
+        text("#{t('receipt.number')}: <b>#{id}</b>", inline_format: true)
 
         move_up 15
-        text("#{t(:amount)}: <b>#{formated_amount}</b>",
+        text("#{t('receipt.amount')}: <b>#{formated_amount}</b>",
              inline_format: true, align: :right)
         pad(10) { stroke_horizontal_rule }
       end
@@ -113,9 +113,9 @@ module Receipt
     def body
       text(
         [
-          "#{t(:received_from)} <b>#{payer}</b>",
-          "#{t(:the_amount_of)} <b>#{formated_amount}</b>",
-          "#{t(:relating_to)} <b>#{description}</b>."
+          "#{t('receipt.received_from')} <b>#{payer}</b>",
+          "#{t('receipt.the_amount_of')} <b>#{formated_amount}</b>",
+          "#{t('receipt.relating_to')} <b>#{description}</b>."
         ].join(' '),
         inline_format: true
       )
@@ -208,7 +208,7 @@ module Receipt
     def tempfilepath
       @tempfilepath ||= File.join(
         Dir.tmpdir,
-        Dir::Tmpname.make_tmpname("#{t(:receipt)}", "#{id}.pdf")
+        Dir::Tmpname.make_tmpname("#{t('receipt.title')}", "#{id}.pdf")
       )
     end
   end

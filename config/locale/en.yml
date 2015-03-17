@@ -1,12 +1,14 @@
 ---
 en:
-  receipt: Receipt
-  receipt_number: Number
-  amount: Amount
-  received_from: Received from
-  the_amount_of: the amount of
-  relating_to: relating to
-  required_param_not_found: required param not found
+  receipt:
+    title: Receipt
+    number: Number
+    amount: Amount
+    received_from: Received from
+    the_amount_of: the amount of
+    relating_to: relating to
+    errors:
+      required_param_not_found: required param not found
   date:
     abbr_day_names:
     - Sun
