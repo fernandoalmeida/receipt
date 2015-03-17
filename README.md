@@ -38,6 +38,9 @@ receipt = Receipt::Pdf.new(
   locale: :en # or 'pt-BR'
 )
 
+receipt.before_receipt_box { my_header_content_for(receipt) }
+receipt.after_receipt_box { my_footer_content_for(receipt) }
+
 # generates file
 File.open(receipt.file)
 
