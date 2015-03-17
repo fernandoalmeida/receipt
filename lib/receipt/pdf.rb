@@ -190,7 +190,8 @@ module Receipt
     end
 
     def load_translations
-      I18n.load_path += Dir[File.expand_path('config/locale/*.yml')]
+      locales = Dir[File.expand_path('../../../config/locale/*.yml', __FILE__)]
+      I18n.load_path += locales
       I18n.backend.load_translations
     end
 
