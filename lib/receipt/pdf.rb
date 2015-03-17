@@ -66,7 +66,9 @@ module Receipt
         :receiver,
         :description
       ].each do |p|
-        @errors[p] = 'required param not found' if params.send(p).to_s.empty?
+        if params.send(p).to_s.empty?
+          @errors[p] = t('required_param_not_found')
+        end
       end
 
       @errors.size == 0

@@ -46,7 +46,7 @@ describe Receipt::Pdf do
           params.delete(p)
           receipt.valid?
 
-          expect(receipt.errors).to include(p)
+          expect(receipt.errors[p]).to eq('required param not found')
         end
       end
     end

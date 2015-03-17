@@ -1,11 +1,12 @@
 ---
 pt-BR:
   receipt: Recibo
-  receipt_number: Numero
+  receipt_number: Número
   amount: Valor
   received_from: Recebi de
   the_amount_of: a quantia de
   relating_to: referente a
+  required_param_not_found: parâmetro obrigatório não encontrado
   date:
     abbr_day_names:
     - Dom
