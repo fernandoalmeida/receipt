@@ -84,6 +84,8 @@ describe Receipt::Pdf do
     it { expect(file).to be_truthy }
     it { expect(file).to match(/(pdf)$/) }
     it { expect(File.exist?(file)).to be_truthy }
+
+    after { File.unlink(file) if File.exist?(file) }
   end
 
   describe '#before_receipt_box' do
