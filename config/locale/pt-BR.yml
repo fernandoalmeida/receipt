@@ -7,6 +7,7 @@ pt-BR:
     received_from: Recebi de
     the_amount_of: a quantia de
     relating_to: referente a
+    currency: R$
     errors:
       required_param_not_found: parâmetro obrigatório não encontrado
   date:

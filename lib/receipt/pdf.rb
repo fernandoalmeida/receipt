@@ -18,7 +18,6 @@ module Receipt
       :receiver,
       :amount,
       :date,
-      :currency,
       :description,
       :logo,
       :location,
@@ -82,6 +81,9 @@ module Receipt
       'application/pdf'
     end
 
+    def currency
+      params.currency || t('receipt.currency')
+    end
     private
 
     def generate

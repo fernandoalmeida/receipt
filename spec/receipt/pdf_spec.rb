@@ -31,6 +31,19 @@ describe Receipt::Pdf do
     it { expect(receipt.description).to eq('transaction #123') }
     it { expect(receipt.logo).to eq('logo.png') }
     it { expect(receipt.location).to eq('Sao Paulo') }
+
+    context 'when the currency is empty' do
+      before { params.delete(:currency) }
+
+      it 'uses a default currency' do
+        expect(receipt.currency).to eq('$')
+      end
+
+      it 'select default by locale' do
+        params.merge!(locale: 'pt-BR')
+        expect(receipt.currency).to eq('R$')
+      end
+    end
   end
 
   describe '#valid?' do
