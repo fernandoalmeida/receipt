@@ -5,7 +5,7 @@ describe Receipt::Pdf do
     {
       id: 1,
       date: date,
-      amount: 100.0,
+      amount: '100.00',
       currency: '$',
       payer: 'Chucky Norris',
       receiver: 'Fernando Almeida',
@@ -24,7 +24,7 @@ describe Receipt::Pdf do
   describe '#initialize' do
     it { expect(receipt.id).to eq(1) }
     it { expect(receipt.date).to eq(date) }
-    it { expect(receipt.amount).to eq(100.0) }
+    it { expect(receipt.amount).to eq('100.00') }
     it { expect(receipt.currency).to eq('$') }
     it { expect(receipt.payer).to eq('Chucky Norris') }
     it { expect(receipt.receiver).to eq('Fernando Almeida') }
