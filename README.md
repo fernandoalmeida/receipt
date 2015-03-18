@@ -17,11 +17,11 @@ gem 'receipt'
 
 And then execute:
 
-    $ bundle install
+    bundle install
 
 Or install it yourself as:
 
-    $ gem install receipt
+    gem install receipt
 
 ## Usage
 
@@ -29,24 +29,27 @@ Or install it yourself as:
 receipt = Receipt::Pdf.new(
   id: 1,
   date: Time.now.to_date,
-  amount: 100.0,
-  currency: '$',
+  amount: '100.00',
   payer: 'Chucky Norris',
   receiver: 'Fernando Almeida',
   description: 'transaction #123',
-  filepath: '/my/receipts/path/file1234.pdf',
-  locale: :en # or 'pt-BR'
 )
 
+# optional custom content before and/or after the receipt
 receipt.before_receipt_box { my_header_content_for(receipt) }
 receipt.after_receipt_box { my_footer_content_for(receipt) }
 
-# generates file
+# generate file
 File.open(receipt.file)
 
 # send to download
 send_data(receipt.data, filename: receipt.filename, type: receipt.mimetype)
 ```
+## Examples
+
+[English](https://github.com/fernandoalmeida/receipt/blob/master/example/receipt_en.pdf)
+
+[Brazilian Portuguese](https://github.com/fernandoalmeida/receipt/blob/master/example/recibo_pt.pdf)
 
 ## Development
 
